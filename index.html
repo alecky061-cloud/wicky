@@ -31,7 +31,7 @@ body {
   z-index: 10;
 }
 
-/* CARD */
+/* MAIN CARD */
 .card {
   max-width: 520px;
   margin: 80px auto;
@@ -103,13 +103,18 @@ video {
   border: 2px solid #ff4da6;
 }
 
-/* MEMORY BOX */
+/* MEMORY */
 #memory {
   display: none;
   margin-top: 20px;
   padding: 15px;
   border-radius: 15px;
   background: rgba(255,77,166,0.1);
+}
+
+/* LOVE GAME */
+#noBtn {
+  position: relative;
 }
 </style>
 </head>
@@ -142,24 +147,26 @@ video {
 
   <div id="s3" class="section">
     <p>Maybe we met in a dream 🌙</p>
-    <button onclick="next('s4')">Enter dream</button>
+    <button onclick="next('s4')">Continue</button>
   </div>
 
   <div id="s4" class="section">
     <p>Some people feel familiar without reason.</p>
-    <button onclick="next('s5')">Continue</button>
+    <button onclick="next('s5')">Mini moment</button>
   </div>
 
   <div id="s5" class="section">
-    <h3 class="glow">Mini moment 🎮</h3>
+    <h3 class="glow">Choose 🎮</h3>
+
     <button onclick="laugh()">Make me laugh 😂</button>
     <button onclick="soft()">Soft message 💖</button>
     <button onclick="openGallery()">Memory gallery 📸</button>
+    <button onclick="openLoveGame()">Final question 💭</button>
   </div>
 
   <!-- MEMORY -->
   <div id="memory">
-    <h3 class="glow">🌸 Final Memory</h3>
+    <h3 class="glow">🌸 Memory unlocked</h3>
     <p>You feel like a soft dream I don’t want to forget.</p>
     <p><b>suki (好き)</b></p>
   </div>
@@ -175,6 +182,14 @@ video {
     <canvas id="canvas" style="display:none;"></canvas>
 
     <div id="gallery" style="margin-top:15px;"></div>
+  </div>
+
+  <!-- LOVE GAME -->
+  <div id="loveGame" class="section">
+    <h3 class="glow">💭 Do I love you?</h3>
+
+    <button onclick="yesLove()">YES ❤️</button>
+    <button id="noBtn" onmouseover="runAway()">NO 😜</button>
   </div>
 
 </div>
@@ -239,6 +254,25 @@ function capture() {
   link.href = imgURL;
   link.download = "elda-memory.png";
   link.click();
+}
+
+/* LOVE GAME */
+function openLoveGame(){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('show'));
+  document.getElementById("loveGame").classList.add('show');
+}
+
+function yesLove(){
+  alert("💖 Correct answer...");
+  document.getElementById("memory").style.display = "block";
+}
+
+/* NO button runs away */
+function runAway(){
+  let btn = document.getElementById("noBtn");
+  let x = Math.random() * 200 - 100;
+  let y = Math.random() * 100 - 50;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 /* sparkles */
